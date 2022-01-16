@@ -22,7 +22,7 @@ your system-wide Python installation clean.  If you want to install
 system-wide, drop the `--user` flag and prepend `sudo -H` to `pip3`.
 
 ```bash
-git clone https://github.com/aramiscd/tv3
+git clone https://github.com/alperyilmaz/tv3
 cd tv3
 pip3 install --user .
 cd ..
@@ -45,7 +45,7 @@ know how to do this.  Otherwise just follow these instructions.
 ```bash
 bash
 sudo -H pip3 install virtualenv
-git clone https://github.com/aramiscd/tv3 ~/.tv3
+git clone https://github.com/alperyilmaz/tv3 ~/.tv3
 cd ~/.tv3
 virtualenv -p python3 env
 env/bin/activate
