@@ -15,7 +15,7 @@ setuptools.setup(
     long_description=readme_text,
     name='tv3',
     package_dir={'': 'src'},
-    py_modules=['notebook', 'terminal_velocity', 'urwid_ui'],
+    py_modules=['tv_notebook', 'terminal_velocity', 'urwid_ui'],
     url='github.com/alperyilmaz/tv3',
     version='0.1',
 )

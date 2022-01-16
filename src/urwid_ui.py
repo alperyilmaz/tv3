@@ -3,7 +3,7 @@
 import logging
 logger = logging.getLogger("tv3")
 
-import notebook
+import tv_notebook
 import pipes
 import shlex
 import subprocess
@@ -194,7 +194,7 @@ class MainFrame(urwid.Frame):
             exclude=None,
     ):
         self.editor = editor
-        self.notebook = notebook.PlainTextNoteBook(
+        self.tv_notebook = tv_notebook.PlainTextNoteBook(
             notes_dir,
             extension,
             extensions,
@@ -261,15 +261,15 @@ class MainFrame(urwid.Frame):
             else:
                 if self.search_box.edit_text:
                     try:
-                        note = self.notebook.add_new(self.search_box.edit_text +  self.notebook.extension)
+                        note = self.tv_notebook.add_new(self.search_box.edit_text +  self.tv_notebook.extension)
                         note = pipes.quote(note.abspath)
                         system(self.editor + ' ' + note, self.loop)
-                    except notebook.NoteAlreadyExistsError:
+                    except tv_notebook.NoteAlreadyExistsError:
                         note = self.search_box.edit_text
-                        note += self.notebook.extension
+                        note += self.tv_notebook.extension
                         note = pipes.quote(note)
                         system(self.editor + ' ' + note, self.loop)
-                    except notebook.InvalidNoteTitleError:
+                    except tv_notebook.InvalidNoteTitleError:
                         # If the filename wouldn't be valid, don't attempt to process it
                         pass # Surpress errors arising from an invalid title
             self.suppress_focus = True
@@ -313,13 +313,13 @@ class MainFrame(urwid.Frame):
         """Do the synchronised list box filter and search box autocomplete."""
         if self.suppress_filter:
             return
-        if len(self.notebook) == 0:
+        if len(self.tv_notebook) == 0:
             self.body = placeholder_text(
                 'You have no notes yet, to create '
                 'a note type a note title then press Enter')
         else:
             self.body = urwid.Padding(self.list_box, left=1, right=1)
-        matching_notes = self.notebook.search(query)
+        matching_notes = self.tv_notebook.search(query)
         matching_notes.sort(key=lambda x: x.mtime, reverse=True)
         self.list_box.filter(matching_notes)
         autocompletable_matches = []
